@@ -3,8 +3,8 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-20.04'
-  demands:
-  - npm
+  # demands:
+  # - npm
 
 variables:
   buildConfiguration: 'Release'
@@ -12,6 +12,14 @@ variables:
   dotnetSdkVersion: '5.x'
 
 steps:
+# Node install
+- task: NodeTool@0
+  displayName: Node install
+  inputs:
+    versionSpec: '6.x' # The version we're installing
+# Write the installed version to the command line
+- script: which node
+
 - task: UseDotNet@2
   displayName: 'Use .NET SDK $(dotnetSdkVersion)'
   inputs:
